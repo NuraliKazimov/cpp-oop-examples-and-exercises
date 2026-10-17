@@ -4,7 +4,7 @@
 using namespace std;
 
 /*
-    Exercise: 
+    Exercise:  
 
     You'll define two classes, Person and Teacher, to represent individuals within the school. 
     The goal is to demonstrate the concept of inheritance and access control modifiers in C++.
@@ -42,6 +42,34 @@ using namespace std;
 */
 
 /*    Solution    */
+class Person {
+    protected:
+    string name;
+    int age;
+    int grades;
+    Person(string name, int age, int grades) {
+        this->age=age;
+        this->name=name;
+        this->grades=grades;
+    }
+    public:
+    int GetGrades() const {
+        return grades;
+    }
+};
+
+class Teacher: public Person {
+    public:
+    Teacher(string name,  int age, int grades): Person( name,  age,  grades){}
+    void ReviewGrades() {
+        cout << "Teacher is reviewing grades." << endl;
+        cout << "Teacher's name: " << Person::name << endl;
+        cout << "Grade: " << GetGrades() << endl;
+
+    }
+
+
+};
 
 
 
