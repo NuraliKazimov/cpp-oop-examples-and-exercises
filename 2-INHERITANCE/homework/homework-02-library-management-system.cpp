@@ -55,9 +55,68 @@ using namespace std;
 
 /* Solution */
 
+class LibraryItem {
+    public:
+    string title;
+    string authorDirector;
+    int publicationYear;
+    LibraryItem(string title, string authorDirector, int publicationYear) : title(title), authorDirector(authorDirector), publicationYear(publicationYear) {}
+    virtual void displayInfo() {
+        cout << title << endl;
+        cout << authorDirector << endl;
+        cout << publicationYear << endl; 
+        cout << "---------------" << endl;
+    }
+
+};
+
+class Book : public LibraryItem {
+    public:
+    string isbn;
+    Book(string title, string authorDirector, int publicationYear, string isbn) : isbn(isbn), LibraryItem(title, authorDirector, publicationYear) {}
+    void displayInfo() {
+         cout << title << endl;
+        cout << authorDirector << endl;
+        cout << publicationYear << endl; 
+        cout << isbn << endl;
+        cout << "---------------" << endl;
+    }
+};
+
+class DVD : public LibraryItem {
+    public:
+    int runtime;
+    DVD(string title, string authorDirector, int publicationYear, int runtime) : runtime(runtime), LibraryItem(title, authorDirector, publicationYear) {}
+    void displayInfo() {
+         cout << title << endl;
+        cout << authorDirector << endl;
+        cout << publicationYear << endl; 
+        cout << runtime << endl;
+        cout << "---------------" << endl;
+    }
+};
+
+class Library {
+    public:
+    vector <LibraryItem*> v;
+    void addItem(LibraryItem* book) {
+        v.push_back(book);
+    }
+    void displayAllItems() {
+        for (LibraryItem* i: v) {
+            i->displayInfo();
+        }
+    }
+
+};
+
+ 
+
 
 
 int main() {
+
+    system("clear");
 
     /*      Example usage:     */
     Library library;
