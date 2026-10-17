@@ -53,7 +53,7 @@ class Person {
         this->grades=grades;
     }
     public:
-    int GetGrades() const {
+    int GetGrades() const  {
         return grades;
     }
 };
