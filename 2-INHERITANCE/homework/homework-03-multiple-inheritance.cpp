@@ -28,23 +28,63 @@ using namespace std;
 /* Starter Code: */
 
 class Project {
-    // ... (Same as provided code)
+    private:
+    string project;
+    protected:
+    string getProjectName() {
+        return project;
+    }
+    Project() : project("") {}
+    Project(string &project) : project(project) {}
+
+   
 };
 
 class TeamMember {
-    // ... (Same as provided code)
+    private:
+    string member;
+    protected:
+    string getTeamMember() {
+        return member;
+    }
+    TeamMember() : member("") {}
+    TeamMember(string &member) : member(member) {}
+
+
 };
 
 class Task {
-    // ... (Same as provided code)
+    private:
+    string task;
+    protected:
+    string getTask() {
+        return task;
+    }
+    Task() : task("") {}
+    Task(string &task) : task(task) {}
+
 };
 
 class ProjectTeamMember : public Project, public TeamMember {
-    // ... (Same as provided code)
+    public:
+    ProjectTeamMember(string project,string member) : TeamMember(member), Project(project) {}
+
+    void displayProjectTeamMember() {
+        cout << "Project: " << getProjectName() << endl;
+        cout << "Team Member: " << getTeamMember() << endl;
+        cout << endl;
+    }
 };
 
 class TeamMemberTask : public TeamMember, public Task {
-    // ... (Same as provided code)
+    public:
+    TeamMemberTask (string member,string task) : TeamMember(member), Task(task) {}
+
+     void displayTeamMemberTask() {
+        cout << "Project: " << getTeamMember() << endl;
+        cout << "Team Member: " << getTask() << endl;
+        cout << endl;
+    }
 };
 
 
