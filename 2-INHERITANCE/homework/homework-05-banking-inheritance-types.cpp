@@ -47,6 +47,62 @@ using namespace std;
     Solution
 */
 
+class Account {
+    private:
+    int accountNumber;
+    string accountHolder;
+    int balance;
+    public:
+    void deposit(int value) {
+        balance=balance+value;
+        cout << "Deposit: " << value << "  Balance: " << balance << endl;
+    }
+    void withdraw(int value) {
+        balance=balance-value;
+        cout << "Withdraw: " << value << "  Balance: " << balance << endl;
+    }
+    int getbalance() const {
+        return balance;
+    }
+    Account(int accountNumber, string accountHolder, int balance) : accountNumber(accountNumber), accountHolder(accountHolder), balance(balance) {}
+};
+
+class SavingsAccount : public Account {
+    public:
+    int val=getbalance();
+    void applyInterest(int a) {
+        val= val+ val*a;
+        cout << "Interest Applied: Balance: " << val << endl;
+
+    }
+    SavingsAccount(int accountNumber, string accountHolder, int balance) : Account( accountNumber, accountHolder, balance) {}
+};
+
+class CheckingAccount: protected Account {
+     public:
+     int val=getbalance();
+     void applyMonthlyFee(int a) {
+        val=val-a;
+        cout << "Monthly Fee Applied: Balance: " << val << endl;
+     }
+     CheckingAccount(int accountNumber, string accountHolder, int balance) : Account( accountNumber, accountHolder, balance) {}
+};
+
+class CreditCardAccount : private Account {
+    public:
+    int val=getbalance();
+     void makePurchase(int a) {
+        val=val-a;
+        if (val<0) {
+            cout << "Insufficient Funds" << endl;
+            return;
+        }
+        cout << "Purchase Made: Amount: " << a << "  Balance: " << val << endl;
+
+     }
+     CreditCardAccount(int accountNumber, string accountHolder, int balance) : Account( accountNumber, accountHolder, balance) {}
+};
+
 
 int main() {
 
