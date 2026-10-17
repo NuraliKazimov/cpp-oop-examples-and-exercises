@@ -55,11 +55,60 @@ using namespace std;
 
 
 /*  Solution  */
+class Vehicle {
+    private:
+    int id;
+    int maxSpeed;
+    public:
+    void display() {
+        cout << " Vehicle ID: " << id << ", Max Speed: " << maxSpeed << " km/h" << endl;
+    }
+    Vehicle(int &id, int &maxSpeed) : id(id), maxSpeed(maxSpeed) {}
+};
+
+class Car : public Vehicle {
+    private:
+    int numDoors;
+    public:
+    int calculateFuelEfficiency() {
+        return 1;
+    }
+    Car(int id, int maxSpeed, int numDoors) : Vehicle(id,maxSpeed), numDoors(numDoors) {}
+
+
+};
+
+class Bus : public Vehicle {
+     private:
+     int maxPassangers;
+     public:
+     string announceNextStop() {
+        return "";
+     }
+
+    Bus(int id, int maxSpeed, int maxPassangers) : Vehicle(id,maxSpeed), maxPassangers(maxPassangers) {}
+
+
+};
+
+class Manager {
+    public:
+    vector <Vehicle*> v;
+    void addVehicle(Vehicle* vehicle)  {
+        v.push_back(vehicle);
+    }
+    void displayFleet() {
+        for (Vehicle* i : v) {
+           i->display();
+        }
+    }
+};
 
 
 
 
 int main() {
+    system("clear");
 
     /*    Example Usage    */
     Car car1(1, 150, 4);
