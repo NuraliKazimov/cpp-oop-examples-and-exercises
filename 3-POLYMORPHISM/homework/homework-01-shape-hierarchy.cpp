@@ -3,65 +3,84 @@
 
 using namespace std;
 
-
 /*
-    Exercise: Polymorphism in C++
+    Exercise: Library Management System
 
-    Instructions:
+    Description:
+    Design and implement a Library Management System using classes and access specifiers in C++. 
+    The system should allow you to manage books in a library.
 
-    1. Create a C++ program that models geometric shapes.
-    2. Define a base class Shape with the following properties and methods:
-        Properties:
-        name (string): The name of the shape.
-        Methods:
-        virtual void draw(): A virtual function that prints a message indicating that a shape is being drawn.
-        The message should include the shape's name.
-    3. Create two derived classes, Circle and Rectangle, that inherit from the Shape class. 
-    Each derived class should have its own specific properties and methods:
-        Circle:
-        Properties:
-        radius (double): The radius of the circle.
-        Methods:
-        Override the draw() method to print a message indicating that a circle is being drawn, along with its radius.
-        Rectangle:
-        Properties:
-        length (double): The length of the rectangle.
-        width (double): The width of the rectangle.
-        Methods:
-        Override the draw() method to print a message indicating that a rectangle is being drawn, along with its length and width.
-    4. In the main() function, create instances of the Circle and Rectangle classes.
-    5. Create an array of pointers to Shape objects and store the addresses of the Circle and Rectangle objects in the array.
-    6. Use a loop to iterate through the array and call the draw() method for each object. 
-    Observe how polymorphism allows you to call the appropriate draw() method based on the actual type of the object.
-    7. Compile and run the program to verify that the correct messages are printed for each shape.
+    Requirements:
 
-    Example Output:
-    Drawing a circle with radius 5.0
-    Drawing a rectangle with length 6.0 and width 4.0
+    1. Create a class named "Book" with the following attributes:
+        Title (a string)
+        Author (a string)
+        Publication Year (an integer)
+        ISBN (a string)
+       
+    2. Make the attributes private to encapsulate them.
 
-    8. Challenge: Extend the program by adding more derived classes (e.g., Triangle, Square) 
-    and further explore polymorphism by creating objects of these classes and adding them to the array of shapes. 
-    Update the draw() methods in the derived classes accordingly.
+    3. Include member functions to:
+        Set the book details (title, author, publication year, ISBN).
+        Display the book details.
+
+    4. Create objects of the "Book" class and demonstrate accessing and modifying the attributes using member functions.
+
+    Tips:
+    Use access specifiers (public and private) to control access to class members.
+    You can choose to implement the member functions directly in the class declaration (inline) or define them outside the class.
+    Test the functionality of the class by creating book objects, setting their details, and displaying the information.
+    This exercise will help you practice using access specifiers to control the visibility of class members and understand the concept of encapsulation.
 */
 
-// Solution:
+
+
+/*  Solution */
+class Book {
+    private:
+    string title;
+    string author;
+    string ISBN;
+    int year;
+
+    public:
+    void setBookDetails(string title1, string author1, int year1, string isbn) {
+        title=title1;
+        author=author1;
+        year=year1;
+        ISBN=isbn;
+    }
+    void displayBookDetails() {
+        cout << title << endl;
+        cout << author << endl;
+        cout << year << endl;
+        cout << ISBN << endl;
+
+
+    }
+
+};
 
 
 
 int main() {
+    system("clear");
 
-    /*      Example usage:     */ 
+    /*      Example usage:     */
+    Book book1;
+    book1.setBookDetails("The Great Gatsby", "F. Scott Fitzgerald", 1925, "9780743273565");
 
-    Circle circle("Circle", 5.0);
-    Rectangle rectangle("Rectangle", 6.0, 4.0);
-    Triangle triangle("Triangle", 4.0, 3.0);
-    Square square("Square", 5.0);
+    Book book2;
+    book2.setBookDetails("To Kill a Mockingbird", "Harper Lee", 1960, "9780060935467");
 
-    Shape* shapes[] = { &circle, &rectangle, &triangle, &square };
+    // Display book details
+    cout << "Book 1 Details:" << endl;
+    book1.displayBookDetails();
+    cout << endl;
 
-    for (int i = 0; i < 4; i++) {
-        shapes[i]->draw();
-    }
+    cout << "Book 2 Details:" << endl;
+    book2.displayBookDetails();
+    cout << endl;
 
     return 0;
 }
