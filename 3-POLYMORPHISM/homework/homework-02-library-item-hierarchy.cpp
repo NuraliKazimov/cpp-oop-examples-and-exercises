@@ -4,78 +4,111 @@
 using namespace std;
 
 /*
-    Exercise: Polymorphism in a Backend Application
+    Exercise: Employee Management System
 
-    Scenario:
-    You are developing a backend application for a library management system. 
-    The application needs to handle various types of items in the library, such as books, e-books, and audio CDs. 
-    Each of these items has specific properties and actions associated with them.
+    Description:
+    Design and implement an Employee Management System using classes and constructors in C++. 
+    The system should allow you to create and manage employee records.
 
     Requirements:
 
-    1. Create a base class called LibraryItem with the following properties and methods:
-        Properties:
-        title (string): The title of the library item.
-        year (int): The year of publication.
-        Methods:
-        virtual void checkout(): A virtual function that marks the item as checked out.
-        virtual void checkin(): A virtual function that marks the item as checked in.
-        virtual void displayInfo(): A virtual function that displays information about the item, 
-        including its title and year of publication.
+    1. Create a class named "Employee" with the following attributes:
+    Employee ID (an integer)
+    Employee name (a string)
+    Employee designation (a string)
+    Employee salary (a floating-point number)
 
-    2. Create three derived classes: Book, EBook, and AudioCD, each inheriting from LibraryItem. 
-       These classes should have their own specific properties and methods:
-        Book:
-        Properties:
-        author (string): The author of the book.
-        Methods:
-        Override the displayInfo() method to include information about the author.
-        EBook:
-        Properties:
-        format (string): The format of the e-book (e.g., PDF, EPUB).
-        Methods:
-        Override the displayInfo() method to include information about the format.
-        AudioCD:
-        Properties:
-        artist (string): The artist of the audio CD.
-        Methods:
-        Override the displayInfo() method to include information about the artist.
+    2. Implement the following constructors for the "Employee" class:
+    A parameterized constructor that initializes all the attributes based on provided values.
+    A default constructor that sets default values for the attributes.
 
-    3. In the main() function, create instances of Book, EBook, and AudioCD objects, each representing a library item.
-    4. Create an array of pointers to LibraryItem objects and store the addresses of the items in the array.
-    5. Use a loop to iterate through the array and perform the following actions:
-        Check out and check in each item to simulate library operations.
-        Display information about each item using the displayInfo() method.
-    
+    3. Include member functions to:
+    Set and get the employee attributes (ID, name, designation, salary).
+    Display the employee details.
 
-    Example Output:
+    4. Create multiple employee objects using different constructors and display their details.
 
-    Book Title: "The Great Gatsby"
-    Author: F. Scott Fitzgerald
-    Year: 1925
-    Status: Checked out
-
-    EBook Title: "The Hitchhiker's Guide to the Galaxy"
-    Format: EPUB
-    Year: 1979
-    Status: Checked in
-
-    Audio CD Title: "Abbey Road"
-    Artist: The Beatles
-    Year: 1969
-    Status: Checked out
-
+    Tips:
+    Use appropriate access specifiers (such as private and public) for the class members.
+    Consider using default values in the parameterized constructor to provide flexibility when creating objects.
+    Test the functionality of constructors by creating objects with and without providing initial values.
+    This exercise will help you practice creating and initializing objects using constructors and defaulted constructors, as well as accessing and displaying object attributes.
 */
 
-// Solution
+
+
+/*  Solution */
+class Employee {
+    public:
+    int ID;
+    string name;
+    string designation;
+    float salary;
+
+    Employee() {
+    ID=0;
+    name="";
+    designation="";
+    salary=0; 
+    }
+
+    Employee(int id, string name1, string d, float s) {
+    ID=id;
+    name=name1;
+    designation=d;
+    salary=s; 
+    }
+
+    void setID(int x) {
+        ID=x;
+    }
+     void setName(string x) {
+        name=x;
+    }
+    void setDesignation(string x) {
+        designation=x;
+    }
+    void setSalary(float x) {
+        salary=x;
+    }
+
+    void displayDetails() {
+        cout << "ID: " << ID << endl;
+        cout << "Name: " << name << endl;
+        cout << "designation: " << designation << endl;
+        cout << "Salary: " << salary << endl;
+}
+    };
+
+
+
+
+
 
 
 
 int main() {
+    system("clear");
 
     /*      Example usage:     */ 
 
-    
+    // Creating employee objects using different constructors
+    Employee emp1(101, "John Doe", "Manager", 5000.0);
+    Employee emp2;
+
+    emp2.setID(102);
+    emp2.setName("Jane Smith");
+    emp2.setDesignation("Engineer");
+    emp2.setSalary(4000.0);
+
+    // Displaying employee details
+    cout << "Employee 1 Details: " << endl;
+    emp1.displayDetails();
+    cout << endl;
+
+    cout << "Employee 2 Details: " << endl;
+    emp2.displayDetails();
+    cout << endl;
 
     return 0;
 }
