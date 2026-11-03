@@ -1,106 +1,144 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 /*
-    Note!
+    Exercise: Decide on Virtual Methods
 
-    Please note that you should not write code or implement solutions; 
-    just provide your answers to the following question:
-*/
+    You are provided with a payment processing system implemented in C++. 
+    The system includes a base class Payment and three derived classes: CreditCardPayment, 
+    DebitCardPayment, and PayPalPayment. Each payment method has its own unique behavior.
 
-
-/*
-    Scenario:
-
-    You are developing a C++ program to simulate a car race. 
-    The program will have a base class called Vehicle and two derived classes, Car and Motorcycle. 
-    The Vehicle class will have methods to get and set the vehicle's speed, direction, and position. 
-    The Car and Motorcycle classes will inherit these methods from the Vehicle class and may also have their own unique methods.
-
-    Exercise:
-
-    Decide which of the following methods should be polymorphic in the Vehicle class:
-       - getSpeed()
-       - setSpeed()
-       - getDirection()
-       - setDirection()
-       - getPosition()
-       - move() - polymorphic
-*/
-
-/*
-    Solution:
-        
-*/
-
-
-
-/*
-    Exercise_2: Polymorphic Methods in E-Commerce
-
-    Scenario:
-
-    You are developing an e-commerce platform. 
-    The platform will have a base class called Product and several derived classes, such as Book, Electronic, and Clothing. 
-    The Product class will have methods to get and set the product's name, price, and description. 
-    The derived classes will inherit these methods from the Product class and may also have their own unique methods.
-
-    Exercise:
-
-    Decide which of the following methods should be polymorphic in the Product class:
-       - getName()
-       - setName()
-       - calculateTax() - polymorphic
-       - calculateShipping() - polymorphic
-       - getPrice()
-       - setPrice()
-       - getDescription()
-       - setDescription()
-*/
-
-/*
-    Solution:
-        
-*/
-
-
-
-/*
-    Exercise_3: Polymorphic Methods in Backend Development
-
-    Scenario:
-
-    You are developing a backend for a social media platform. 
-    The backend will have a base class called User and several derived classes, 
-    such as RegularUser, ContentCreator, and Administrator. 
-    The User class will have methods to get and set the user's name, email address, and profile picture. 
-    The derived classes will inherit these methods from the User class and may also have their own unique methods.
-
-    Exercise:
-
-    Decide which of the following methods should be polymorphic in the User class:
-       - getName()
-       - manageUsers()
-       - setName()
-       - postContent()- polymorphic
-       - getEmailAddress()
-       - setEmailAddress()
-       - getProfilePicture()
-       - deleteContent()- polymorphic (but depends on situation)
-       - setProfilePicture()- polymorphic
-*/
-
-/*
-    Solution:
-
+    Your task is to decide which methods should be polymorphic (i.e., override in derived classes) 
+    and modify the code accordingly. 
     
+    Follow these steps:
+
+    1. Review the existing code and identify methods that should be made virtual (polymorphic). 
+    Polymorphic methods are those that have a different implementation in the derived classes 
+    and are related to the specific payment method.
+    2. Implement virtual methods in the derived classes by overriding the base class method.
+    3. Update the main function to create instances of different payment methods, set payment details, 
+    and process payments using polymorphism.
+    4. Test the code to ensure that each payment method behaves correctly and that polymorphism is used effectively.
+
+    Note: You can make any method virtual if it is related to the specific payment method's behavior. 
+    Some methods may not need to be virtual if they have a common implementation across all payment methods.
 */
 
+class Payment {
+    public:
+        Payment() : amount(0.0), currency("USD"), status("Pending") {}
+
+        void setAmount(double amt) { amount = amt; }
+        void setCurrency(const string& curr) { currency = curr; }
+        void setStatus(const string& stat) { status = stat; }
+
+        double getAmount() const { return amount; }
+        string getCurrency() const { return currency; }
+        string getStatus() const { return status; }
+
+        // Decide which methods should be virtual and make them so.
+        // ?? void processPayment() {
+        //     // Implement processPayment in derived classes if needed
+        // 
+        virtual void processPayment() {}
+             
+        
+        
+
+        virtual ~Payment() {}
+
+    private:
+        double amount;
+        string currency;
+        string status;
+};
+
+
+class CreditCardPayment : public Payment {
+    public:
+        CreditCardPayment(const string& cardType) : cardType(cardType) {}
+
+        void authorizePayment() {
+            cout << "Authorizing Credit Card Payment of " << getAmount() << " " << getCurrency() << " (Card Type: " << cardType << ")" << endl;
+            setStatus("Authorized");
+        }
+
+        // Override the base class method if it's virtual
+        // void processPayment()
+        void processPayment() override {
+            this->authorizePayment();
+        }
+        
+
+    private:
+        string cardType;
+};
+
+
+class DebitCardPayment : public Payment {
+    public:
+        DebitCardPayment(const string& cardType) : cardType(cardType) {}
+
+        void verifyFunds() {
+            cout << "Verifying Funds for Debit Card Payment of " << getAmount() << " " << getCurrency() << " (Card Type: " << cardType << ")" << endl;
+            setStatus("Funds Verified");
+        }
+
+        // Override the base class method if it's virtual
+        // void processPayment()
+         void processPayment() override {
+            this->verifyFunds();
+        }
+        
+
+    private:
+        string cardType;
+};
+
+
+class PayPalPayment : public Payment {
+    public:
+        PayPalPayment(const string& email) : email(email) {}
+
+        void executePayment() {
+            cout << "Executing PayPal Payment of " << getAmount() << " " << getCurrency() << " (Email: " << email << ")" << endl;
+            setStatus("Executed");
+        }
+
+        // Override the base class method if it's virtual
+        // void processPayment()
+          void processPayment() override {
+            this->executePayment();
+        }
+
+    private:
+        string email;
+};
 
 
 int main() {
+    
+    system("clear");
 
+    CreditCardPayment creditCardPayment("Visa");
+    DebitCardPayment debitCardPayment("Mastercard");
+    PayPalPayment payPalPayment("example@example.com");
 
+    creditCardPayment.setAmount(100.0);
+    debitCardPayment.setAmount(50.0);
+    payPalPayment.setAmount(200.0);
+
+    Payment* payments[] = { &creditCardPayment, &debitCardPayment, &payPalPayment };
+
+    for (Payment* payment : payments) {
+        // Use polymorphism to process payments
+        // TODO:
+        payment->processPayment();
+    }
+
+    return 0;
 }
 
