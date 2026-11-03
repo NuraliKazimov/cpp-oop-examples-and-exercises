@@ -42,14 +42,41 @@ using namespace std;
 class Account {
     public:
         // Constructor, virtual destructor, and methods go here
-
-        
+        int accountNumber;
+        double balance;
+        Account(const int accountNumber, const double balance) : accountNumber(accountNumber), balance(balance) {}
+        ~Account() {}
+        virtual void deposit(double amount) {
+            balance=balance+amount;
+        }
+        virtual void withdraw(double amount) {
+            balance=balance-amount;
+        }
+        virtual void displayBalance() {
+            cout << "Balance: " << balance << endl;
+            cout << endl;
+        }
+           
 };
 
 
 class SavingsAccount : public Account {
     public:
         // Constructor and overridden methods go here
+        int rate;
+        SavingsAccount(const int accountNumber, const double balance, int rate) : Account(accountNumber,balance), rate(rate) {}
+        void displayBalance() override {
+            cout << "Balance: " << balance << endl;
+            cout << "Interest Rate: " << rate << endl;
+            cout << endl;
+        }
+        void withdraw(double amount) override {
+              if (amount<balance) {
+                balance=balance-amount;
+              } else {
+                cout << "Error" << endl;
+              }
+        }
 
         
 };
@@ -58,12 +85,27 @@ class SavingsAccount : public Account {
 class CheckingAccount : public Account {
     public:
         // Constructor and overridden methods go here
+        public:
+        CheckingAccount(const int accountNumber, const double balance) : Account(accountNumber,balance) {}
+        void displayBalance() override {
+            cout << "Balance: " << balance << endl;
+            cout << "It is a checking account" << endl;
+            cout << endl;
+        }
+        void withdraw(double amount) override {
+              if (amount<balance) {
+                balance=balance-amount;
+              } else {
+                cout << "Error" << endl;
+              }
+        }
 
         
 };
 
 
 int main() {
+    system("clear");
     // Create instances of SavingsAccount and CheckingAccount
     // Deposit and withdraw funds, display balances
     // Properly clean up objects
@@ -84,6 +126,21 @@ int main() {
         // Properly clean up objects
         
     */
+    Account* savings = new SavingsAccount(1001, 1000.0, 3.0);
+    Account* checking = new CheckingAccount(2001, 2000.0);
+    savings->deposit(500);
+    savings->withdraw(2000);
+    checking->deposit(1500);
+    checking->withdraw(500);
+    Account* accounts[]= {savings,checking};
+
+    for (Account* i : accounts) {
+        i->displayBalance();
+        delete i;
+    }
+    
+   
+
 
     return 0;
 }
