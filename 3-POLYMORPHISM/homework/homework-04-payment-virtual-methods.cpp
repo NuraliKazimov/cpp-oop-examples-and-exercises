@@ -40,6 +40,12 @@ class Payment {
         string getStatus() const { return status; }
 
         // Decide which methods should be virtual and make them so.
+        // ?? void processPayment() {
+        //     // Implement processPayment in derived classes if needed
+        // 
+        virtual void processPayment() {}
+             
+        
         
 
         virtual ~Payment() {}
@@ -61,6 +67,10 @@ class CreditCardPayment : public Payment {
         }
 
         // Override the base class method if it's virtual
+        // void processPayment()
+        void processPayment() override {
+            this->authorizePayment();
+        }
         
 
     private:
@@ -78,6 +88,10 @@ class DebitCardPayment : public Payment {
         }
 
         // Override the base class method if it's virtual
+        // void processPayment()
+         void processPayment() override {
+            this->verifyFunds();
+        }
         
 
     private:
@@ -95,7 +109,10 @@ class PayPalPayment : public Payment {
         }
 
         // Override the base class method if it's virtual
-        
+        // void processPayment()
+          void processPayment() override {
+            this->executePayment();
+        }
 
     private:
         string email;
@@ -119,6 +136,7 @@ int main() {
     for (Payment* payment : payments) {
         // Use polymorphism to process payments
         // TODO:
+        payment->processPayment();
     }
 
     return 0;
