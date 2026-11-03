@@ -1,105 +1,76 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 /*
-    Note!
+    Exercise: Bank Account Management System
 
-    Please note that you should not write code or implement solutions; 
-    just provide your answers to the following question:
-*/
+    You need to implement a simple bank account management system using encapsulation. 
+    The system should have the following features:
 
-
-/*
-    Scenario:
-
-    You are developing a C++ program to simulate a car race. 
-    The program will have a base class called Vehicle and two derived classes, Car and Motorcycle. 
-    The Vehicle class will have methods to get and set the vehicle's speed, direction, and position. 
-    The Car and Motorcycle classes will inherit these methods from the Vehicle class and may also have their own unique methods.
-
-    Exercise:
-
-    Decide which of the following methods should be polymorphic in the Vehicle class:
-       - getSpeed()
-       - setSpeed()
-       - getDirection()
-       - setDirection()
-       - getPosition()
-       - move()
-*/
-
-/*
-    Solution:
-        
-*/
-
-
-
-/*
-    Exercise_2: Polymorphic Methods in E-Commerce
-
-    Scenario:
-
-    You are developing an e-commerce platform. 
-    The platform will have a base class called Product and several derived classes, such as Book, Electronic, and Clothing. 
-    The Product class will have methods to get and set the product's name, price, and description. 
-    The derived classes will inherit these methods from the Product class and may also have their own unique methods.
-
-    Exercise:
-
-    Decide which of the following methods should be polymorphic in the Product class:
-       - getName()
-       - setName()
-       - calculateTax()
-       - calculateShipping()
-       - getPrice()
-       - setPrice()
-       - getDescription()
-       - setDescription()
-*/
-
-/*
-    Solution:
-        
-*/
-
-
-
-/*
-    Exercise_3: Polymorphic Methods in Backend Development
-
-    Scenario:
-
-    You are developing a backend for a social media platform. 
-    The backend will have a base class called User and several derived classes, 
-    such as RegularUser, ContentCreator, and Administrator. 
-    The User class will have methods to get and set the user's name, email address, and profile picture. 
-    The derived classes will inherit these methods from the User class and may also have their own unique methods.
-
-    Exercise:
-
-    Decide which of the following methods should be polymorphic in the User class:
-       - getName()
-       - manageUsers()
-       - setName()
-       - postContent()
-       - getEmailAddress()
-       - setEmailAddress()
-       - getProfilePicture()
-       - deleteContent()
-       - setProfilePicture()
-*/
-
-/*
-    Solution:
-
+    1. Each account should have a unique account number, holder name, and balance.
+    2. The balance should not be directly accessible from outside the class.
+    3. The account holder should be able to deposit and withdraw funds.
+    4. The account holder should be able to check their account balance.
     
+    Your task is to create a C++ class called BankAccount that encapsulates the above features. 
+    Here's a code template to get you started:
 */
+
+class BankAccount {
+    private:
+        // Private member variables
+        int accountNumber;
+        string holderName;
+        double balance;
+
+    public:
+        // Constructor
+        BankAccount(int accountNumber, const string &holderName, double initialBalance) {
+            this->accountNumber=accountNumber;
+            this->holderName=holderName;
+            this->balance=initialBalance;
+        }
+
+        void withdraw(int a) {
+            balance=balance-a;
+        }
+        void deposit(int a) {
+            balance=balance+a;
+        }
+        void getter() {
+            cout << "balance: " << balance << endl;
+        }
+};
 
 
 
 int main() {
 
+    // TODO: Create an instance of the BankAccount class
+    // TODO: Test the deposit, withdraw, and check balance operations
 
+    /*
+        You need to complete the implementation of the BankAccount class by:
+
+        1. Initializing the member variables in the constructor.
+        2. Implementing member functions for deposit, withdraw, and check balance.
+        3. Testing the functionality of your class in the main function by creating an instance 
+        of BankAccount and performing deposit, withdrawal, and balance checks.
+        
+        Remember to enforce encapsulation by keeping the member variables private and providing public member functions to access and modify them.
+
+        This exercise will help you practice encapsulation and understand how to hide 
+        implementation details while exposing a controlled interface to the users of your class!
+    */
+
+    BankAccount acc1(4169, "David", 1000);
+    acc1.withdraw(100);
+    acc1.getter();
+    acc1.deposit(500);
+    acc1.getter();
+
+    return 0;
 }
+
