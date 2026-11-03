@@ -42,6 +42,40 @@ using namespace std;
 
 /*  Solution:  */
 
+class BackendService {
+  public:
+  void connect() {
+    cout << "The service is connected to a generic backend service" << endl;
+  }
+  virtual void performTask() {
+    cout << "The servive is performing a generic task" << endl;
+  }
+};
+
+class DatabaseService : public BackendService {
+      public:
+      void connect(string connectionString) {
+        cout << "The service is connected to a database with " << connectionString << endl;
+      }
+      void performTask() override {
+        cout << "The service is performing a database-specific task" << endl;
+      }
+};
+
+class APIService : public BackendService {
+      public:
+      void connect(string apiKey) {
+        cout << "The service is connected to an API with " << apiKey<< endl;
+      }
+      void performTask() override {
+        cout << "The service is performing an API-specific task" << endl;
+      }
+      void connect() {
+        cout << "The service is connected to an API without an API key" << endl;
+      }
+};
+
+
 
 
 
@@ -65,3 +99,4 @@ int main() {
     api.connect(); // Calls the derived class method (hiding the base class method)
 
 }
+
