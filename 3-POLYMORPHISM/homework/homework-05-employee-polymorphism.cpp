@@ -46,6 +46,55 @@ using namespace std;
 
 
 /*  Solution:  */
+class Employee {
+    public:
+    string name;
+    double baseSalary;
+    Employee(const string& n, double salary) : name(n), baseSalary(salary) {}
+    virtual double calculateSalary() const {
+        return baseSalary;
+    }
+    virtual void display() {
+        cout << "Salary: " << this->calculateSalary() << endl;
+        cout << "Name: " << name << endl;
+        cout << endl;
+    }
+
+};
+
+class Manager : public Employee {
+     public:
+     double bonus;
+     Manager(string name, double salary, double bonus) : Employee(name, salary), bonus(bonus) {}
+     double calculateSalary() const override {
+         return baseSalary+bonus;
+     }
+     void display() override {
+        cout << "Manager:" << endl;
+        cout << "Salary: " << this->calculateSalary() << endl;
+        cout << "Name: " << name << endl;
+        cout << endl;
+     }
+     
+
+};
+
+class Developer : public Employee {
+     public:
+     int numberOfProjects;
+     Developer(string name, double salary, int numberOfProjects) : Employee(name, salary),  numberOfProjects(numberOfProjects) {}
+     double calculateSalary() const override {
+         return baseSalary+numberOfProjects*1000;
+     }
+     void display() override {
+        cout << "Developer:" << endl;
+        cout << "Salary: " << this->calculateSalary() << endl;
+        cout << "Name: " << name << endl;
+        cout << endl;
+     }
+     
+
+};
 
 
 
@@ -62,7 +111,8 @@ int main() {
     employees[2] = new Developer("Charlie", 55000, 3);
 
     for (int i = 0; i < numEmployees; i++) {
-        
+        employees[i]->display();
+        delete employees[i];
     }
 
     // Clean up
