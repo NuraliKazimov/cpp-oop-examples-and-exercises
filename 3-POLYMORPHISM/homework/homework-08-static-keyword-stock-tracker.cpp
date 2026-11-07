@@ -24,6 +24,13 @@ using namespace std;
 */
 double trackStockPrice(string symbol, double currentPrice) {
     // your code
+    static unordered_map <string,double> maxPrice;
+    if (maxPrice.find(symbol)==maxPrice.end() || currentPrice>maxPrice[symbol]) {
+        maxPrice[symbol]=currentPrice;
+    }
+    return maxPrice[symbol];
+    
+    
 }
 
 
@@ -40,7 +47,36 @@ double trackStockPrice(string symbol, double currentPrice) {
 */
 class BankAccount {
     // your code
+    private:
+    static int accNumber;
+    static int total;
+    double balance=0;
+    public:
+    BankAccount() {
+        accNumber++;
+        total++;
+    }
+    void deposit(int a) {
+        balance=balance+a;
+    }
+    void withdraw(int a) {
+        balance=balance-a;
+    }
+void displayAccountDetails()  {
+    cout << "Account Number: " << accNumber << endl;
+    cout << "Balance: " << balance << endl;
+    cout << endl;
+}
+static int totalAccounts() {
+    return total;
+}
+
+
 };
+
+int BankAccount::accNumber=1000;
+int BankAccount::total=0;
+
 
 
 
@@ -52,9 +88,24 @@ class BankAccount {
 */
 class OnlyOneInstance {
     // your code
+    private:
+        static OnlyOneInstance *instance;
+        OnlyOneInstance() {}
+
+    public:
+        OnlyOneInstance(const OnlyOneInstance &obj) = delete;
+        
+        static OnlyOneInstance *getInstance() {
+            if (instance == nullptr) {
+                instance = new OnlyOneInstance();
+                return instance;
+            } else {
+                return instance;
+            }
+        }
 };
 
-
+OnlyOneInstance *OnlyOneInstance::instance = nullptr;
 
 
 /*
@@ -73,7 +124,31 @@ class OnlyOneInstance {
 static int primes[100] = {0};   // Static cache for Prime numbers
 
 void generateAndCachePrimes(int limit) {
-    // your code
+    static int count;
+    for (int i=2; i<limit; ++i) {
+        if (primes[i]==i) {
+            continue;
+        }
+        bool isTrue=true;
+        for (int j=2; j<=i/2; ++j) {
+            if (i%j==0) {
+                isTrue=false;
+            }
+        }
+        if (isTrue) {
+           primes[i]=i;
+           count++;
+        }
+    }
+    cout << "The number of primes up to " << limit << " is " << count << endl;
+    cout << "Primes: ";
+    for (int i: primes) {
+        if (i!=0) {
+            cout << i << " ";
+        }
+
+    }
+
 }
 
 
@@ -81,30 +156,7 @@ void generateAndCachePrimes(int limit) {
 
 
 int main() {
-    BankAccount account1;
-    account1.deposit(1000);
-    account1.withdraw(500);
-    account1.displayAccountDetails();
-
-    BankAccount account2;
-    account2.deposit(1500);
-    account2.displayAccountDetails();
-
-    // Display the total number of accounts created.
-    std::cout << "Total Accounts Created: " << BankAccount::totalAccounts << std::endl;
-
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-int main() {
+    
 
     //  Exercise-1: example usage
     double price1 = trackStockPrice("AAPL", 150.25);
@@ -131,18 +183,24 @@ int main() {
     account2.deposit(1500);
     account2.displayAccountDetails();
 
+    BankAccount account3;
+    account3.displayAccountDetails();
+
     // Display the total number of accounts created.
-    cout << "Total Accounts Created: " << BankAccount::totalAccounts << endl;
+    cout << "Total Accounts Created: " << BankAccount::totalAccounts() << endl;
 
 
 
     // Exercise-3: example usage
     // your code ;-)
+     OnlyOneInstance* first =OnlyOneInstance::getInstance();
+     OnlyOneInstance* second =OnlyOneInstance::getInstance();
+     cout << first << " " << second << endl;
 
 
 
     // Exercise-4: example usage
     // your code ;-)
-
+    generateAndCachePrimes(100);
 
 }
