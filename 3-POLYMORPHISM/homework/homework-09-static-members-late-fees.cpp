@@ -23,33 +23,33 @@ using namespace std;
 
 class LibraryItem {
     public:
-        LibraryItem(const string& title) : title(title) {}
+        LibraryItem(const string& title) : title(title)  {
+            totalItem++;
+        }
 
         virtual double calculateLateFee(int daysLate) const = 0;
 
         virtual void displayInfo() const {
-            cout << "Title: " << title << std::endl;
+            cout << "Title: " << title << endl;
         }
-
-        // Add a static member to keep track of the total library items
-        // your code ...
+        static int totalItem;
 
     protected:
         string title;
 };
+
+int LibraryItem::totalItem=0;
 
 // Define the static member totalItems for the LibraryItem class here
 // Initialize it to 0.
 
 class Book : public LibraryItem {
     public:
-        Book(const string& title, const string& author) : LibraryItem(title), author(author) {
-            // Increment the totalItems count for each book added.
-            // Hint: Use the static member of the LibraryItem class.
-        }
-
+        Book(const string& title, const string& author) : LibraryItem(title), author(author) {}
+        
         double calculateLateFee(int daysLate) const override {
             // Implement the late fee calculation for books.
+            return daysLate*5;
         }
 
         void displayInfo() const override {
@@ -63,13 +63,9 @@ class Book : public LibraryItem {
 
 class DVD : public LibraryItem {
     public:
-        DVD(const string& title, int duration) : LibraryItem(title), duration(duration) {
-            // Increment the totalItems count for each DVD added.
-            // Hint: Use the static member of the LibraryItem class.
-        }
-
+        DVD(const string& title, int duration) : LibraryItem(title), duration(duration) {}
         double calculateLateFee(int daysLate) const override {
-            // Implement the late fee calculation for DVDs.
+            return daysLate*10;
         }
 
         void displayInfo() const override {
@@ -83,11 +79,18 @@ class DVD : public LibraryItem {
 
 
 int main() {
+    system("clear");
     // Create instances of Book and DVD and test their functionality.
     // Hint: Create Book and DVD objects, display their information, and calculate late fees.
 
     // Display the total number of library items using the static member totalItems.
     // Hint: Access the totalItems static member from the LibraryItem class.
+    Book book("Roman", "Victor Hugo");
+    DVD dvd("Music",3);
+    DVD dvd2("Music",4);
+    book.displayInfo();
+    dvd.displayInfo();
+    cout << "The number of items: " << LibraryItem::totalItem;
 
     return 0;
 }
