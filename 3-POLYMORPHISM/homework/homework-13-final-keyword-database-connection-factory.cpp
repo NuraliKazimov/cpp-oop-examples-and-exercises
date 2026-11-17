@@ -23,20 +23,18 @@ class DatabaseConnection {
 };
 
 // TODO: Decide whether to mark the following class as final or not
-class MySqlConnection : public DatabaseConnection {
+class MySqlConnection final : public DatabaseConnection {
     public:
         void connect() const override {
             cout << "Connecting to MySQL database..." << endl;
-            // TODO: Implement connection logic for MySQL
         }
 };
 
 // TODO: Decide whether to mark the following class as final or not
-class PostgresConnection : public DatabaseConnection {
+class PostgresConnection final : public DatabaseConnection {
     public:
         void connect() const override {
             cout << "Connecting to PostgreSQL database..." << endl;
-            // TODO: Implement connection logic for PostgreSQL
         }
 };
 
@@ -45,12 +43,12 @@ class ConnectionFactory {
     public:
         // TODO: Decide whether to mark the following methods as static or not
         // Factory method to create a MySQL connection
-        DatabaseConnection* createMySQLConnection() {
+       static DatabaseConnection* createMySQLConnection() {
             return new MySqlConnection();
         }
 
         // Factory method to create a PostgreSQL connection
-        DatabaseConnection* createPostgresConnection() {
+       static DatabaseConnection* createPostgresConnection() {
             return new PostgresConnection();
         }
 };
