@@ -14,7 +14,7 @@ using namespace std;
 
     Instructions:
 
-    1. Define an abstract interface named DataStorage with the following pure virtual functions:
+1. Define an abstract interface named DataStorage with the following pure virtual functions:
         void storeData(const string& data): This function should represent storing data.
         string retrieveData(): This function should represent retrieving data.
         Implement two concrete classes that inherit from the DataStorage interface:
@@ -30,30 +30,56 @@ using namespace std;
 
 // Abstract interface for data storage
 class DataStorage {
-    // TODO: Declare pure virtual functions for storing and retrieving data
-    virtual ~DataStorage() {}   // Virtual destructor
+    public:
+        // Declare pure virtual functions for storing and retrieving data
+        virtual void storeData(string data) = 0;
+        virtual string retrieveData() = 0;
+
+        virtual ~DataStorage() {}   // Virtual destructor
 };
 
 
 // Concrete class implementing data storage using a file
 class FileStorage : public DataStorage {
-    // TODO: Implement functions to store and retrieve data using a file
+    private:
+        string fileData;
 
-    // Virtual destructor
-    ~FileStorage() {
-        cout << "FileStorage Destructor" << endl;
-    }
+    public:
+        // Implement functions to store and retrieve data using a file
+        void storeData(string data) override {
+            fileData = data;
+        }
+
+        string retrieveData() override {
+            return fileData;
+        }
+
+        // Virtual destructor
+         ~FileStorage() {
+            cout << "FileStorage Destructor" << endl;
+        }
 };
 
 
 // Concrete class implementing data storage using a database
 class DatabaseStorage : public DataStorage {
-    // TODO: Implement functions to store and retrieve data using a database
+    private:
+        string dbData;
 
-    // Virtual destructor
-    ~DatabaseStorage() {
-        cout << "DatabaseStorage Destructor" << endl;
-    }
+    public:
+        // Implement functions to store and retrieve data using a database
+        void storeData(string data) override {
+            dbData = data;
+        }
+
+        string retrieveData() override {
+            return dbData;
+        }
+
+        // Virtual destructor
+        ~DatabaseStorage() {
+            cout << "DatabaseStorage Destructor" << endl;
+        }
 };
 
 
@@ -70,4 +96,6 @@ int main() {
     DatabaseStorage databaseStorage;
     databaseStorage.storeData("DatabaseStorage Data");
     cout << "DatabaseStorage: " << databaseStorage.retrieveData() << endl;
+    
+    return 0;
 }
