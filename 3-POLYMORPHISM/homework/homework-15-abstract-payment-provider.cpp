@@ -17,7 +17,7 @@ using namespace std;
 
     Requirements:
 
-    1. Create an abstract class PaymentMethod with the following features:
+1. Create an abstract class PaymentMethod with the following features:
     Payment Processing Method: Include a method processPayment with a double parameter representing the amount to be processed.
 
     2. Implement two concrete subclasses of PaymentMethod:
@@ -42,31 +42,51 @@ using namespace std;
 // Abstract class representing a payment method
 class PaymentMethod {
     public:
-        // TODO: Add a pure virtual function to process payment
+        // Pure virtual function to process payment
+        virtual void processPayment(double amount)=0;
 
-        // TODO: Add a common function to log payment attempts
+        // Common function to log payment attempts
+        void logPaymentAttempt(double amount) {
+            cout << "Payment attempt for amount: " << amount << " logged." << endl;
+        }
+
+        // Virtual destructor for polymorphic cleanup
+        virtual ~PaymentMethod() {}
 };
 
 // Concrete subclass for processing credit card payments
 class CreditCardPayment : public PaymentMethod {
     public:
-        // TODO: Implement the processPayment function
+        // Implement the processPayment function
+        void processPayment(double amount) override {
+            cout << "Processing payment using a credit card: " << amount << endl;
+        }
 };
 
 // Concrete subclass for processing PayPal payments
 class PayPalPayment : public PaymentMethod {
     public:
-        // TODO: Implement the processPayment function
+        // Implement the processPayment function
+        void processPayment(double amount)override {
+            cout << "Processing payment using PayPal: " << amount << endl;
+        }
 };
 
 
 int main() {
 
-    // TODO: Create instances of CreditCardPayment and PayPalPayment
+    // Create instances of CreditCardPayment and PayPalPayment
+    CreditCardPayment creditCard;
+    PayPalPayment payPal;
 
-    // TODO: Log payment attempts for different amounts
+    // Log payment attempts and process payments for credit card
+    creditCard.logPaymentAttempt(190);
+    creditCard.processPayment(190);
+    cout << endl;
 
-    // TODO: Process payments using each payment method
+    // Log payment attempts and process payments for PayPal
+    payPal.logPaymentAttempt(500);
+    payPal.processPayment(500);
 
     return 0;
 }
