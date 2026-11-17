@@ -54,7 +54,7 @@ class Authenticator {
 int main() {
 
     // TODO: Create an instance of BasicAuthenticator
-    BasicAuthenticator basicAuth("admin", "admin123");
+    BasicAuthenticator  basicAuth("admin", "admin123");
 
     // TODO: Authenticate using the BasicAuthenticator
     if (basicAuth.authenticate("admin", "admin123")) {
