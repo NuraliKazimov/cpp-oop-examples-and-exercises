@@ -34,6 +34,57 @@ using namespace std;
     Solution
 */ 
 
+class User {
+    private:
+    string name;
+    public:
+    User(string name): name(name) {}
+    string getName() {
+        return name;
+    }
+    virtual void viewProfile() {
+        cout << "Viewing the profile of " << name << endl;
+    }
+    virtual void login() {}
+    virtual void performAction() {}
+    virtual void logout()  {}
+
+    
+
+};
+
+
+class ModeratorUser: public User {
+    public:
+    ModeratorUser(string name): User(name) {}
+    void viewProfile() override {
+        cout << "Viewing the profile of " << getName() << endl;
+    }
+    void login() override {}
+    void performAction() override {}
+    void logout() override {}
+    void moderateContent() {
+        cout << "Content modearted by " << getName() << endl;
+    }
+    
+
+};
+
+class ManagerUser: public User {
+    public:
+    ManagerUser(string name): User(name) {}
+    void viewProfile() override {
+        cout << "Viewing the profile of " << getName() << endl;
+    }
+    void login() override {}
+    void performAction() override {}
+    void logout() override {}
+     void manageUsers() {
+        cout << "Users managed by " << getName() << endl;
+    }
+    
+    
+};
 
 
 int main() {
@@ -45,7 +96,7 @@ int main() {
     user1->login();
     user1->performAction();
     user1->viewProfile();
-    user1->logout();
+    user1->viewProfile();
 
     user2->login();
     user2->performAction();
@@ -66,5 +117,8 @@ int main() {
     delete user1;
     delete user2;
 }
+
+
+
 
 
