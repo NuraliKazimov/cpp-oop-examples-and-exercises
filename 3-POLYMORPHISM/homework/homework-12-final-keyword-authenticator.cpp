@@ -26,8 +26,8 @@ class Authenticator {
 };
 
 
-// TODO: Decide whether to mark the following class as final or not
-class BasicAuthenticator : public Authenticator {
+// TODO: Decide whether to mark the following class as final or not | no
+ class BasicAuthenticator : public Authenticator {
     public:
         BasicAuthenticator(const string& validUsername, const string& validPassword)
             : validUsername_(validUsername), validPassword_(validPassword) {}
@@ -44,13 +44,12 @@ class BasicAuthenticator : public Authenticator {
 
 // TODO: Create a derived class (you can name it CustomAuthenticator) that attempts to extend BasicAuthenticator
 // Uncommenting the following lines should result in a compilation error if BasicAuthenticator is marked as final
-/*
+
     class CustomAuthenticator : public BasicAuthenticator {
     public:
         CustomAuthenticator(const string& validUsername, const string& validPassword)
             : BasicAuthenticator(validUsername, validPassword) {}
     };
-*/
 
 int main() {
 
@@ -66,7 +65,7 @@ int main() {
 
     // TODO: Create an instance of CustomAuthenticator (if allowed) and attempt authentication
 
-    /*
+    
         CustomAuthenticator customAuth("user", "pass");
 
         if (customAuth.authenticate("user", "pass")) {
@@ -74,7 +73,6 @@ int main() {
         } else {
             cout << "Authentication failed!" << endl;
         }
-    */
 
     return 0;
 }
