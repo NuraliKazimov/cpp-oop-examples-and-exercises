@@ -15,7 +15,7 @@ using namespace std;
     You are tasked with designing a system that can store data using different data storage mechanisms in a web backend. 
     Create a C++ program that demonstrates the use of an abstract class to model different types of data storage providers.
 
-    1. Create an abstract class DataStorageProvider with the following features:
+1. Create an abstract class DataStorageProvider with the following features:
         A pure virtual function storeData that takes a string parameter representing the data to be stored.
     2. Implement two concrete subclasses of DataStorageProvider:
         RelationalDatabaseStorage: Implement the storeData function to display a message indicating that the data is being stored in a relational database.
@@ -33,33 +33,55 @@ using namespace std;
 // Abstract class representing a data storage provider
 class DataStorageProvider {
     public:
-        // TODO: Add a pure virtual function to store data
+        // Pure virtual function to store data
+        virtual void storeData(string par)=0;
 
-        // TODO: Add a common function to log storage attempts
+        // Common function to log storage attempts
+        void logStorageAttempt(string par) {
+            cout << "Storage attempt for data: " << par << " logged." << endl;
+        }
+
+        // Virtual destructor for polymorphic cleanup
+        virtual ~DataStorageProvider() {}
 };
 
 // Concrete subclass for storing data in a relational database
 class RelationalDatabaseStorage : public DataStorageProvider {
     public:
-        // TODO: Implement the storeData function
+        // Implement the storeData function
+        void storeData(string par) override {
+            cout << "Storing data in a relational database: " << par << endl;
+        }
 };
 
 // Concrete subclass for storing data in a cloud-based NoSQL database
 class CloudNoSQLStorage : public DataStorageProvider {
     public:
-        // TODO: Implement the storeData function
+        // Implement the storeData function
+        void storeData(string par) override {
+            cout << "Storing data in a cloud-based NoSQL database: " << par << endl;
+        }
 };
 
 
 
 int main() {
 
-    // TODO: Create instances of RelationalDatabaseStorage and CloudNoSQLStorage
+    // Create instances of RelationalDatabaseStorage and CloudNoSQLStorage
+    RelationalDatabaseStorage relationalDB;
+    CloudNoSQLStorage cloudNoSQL;
 
-    // TODO: Log storage attempts for different data
+    // Log storage attempts and store data for relational database
+    relationalDB.logStorageAttempt("DB");
+    relationalDB.storeData("DB");
 
-    // TODO: Store data using each storage provider
+    cout << endl;
 
+    // Log storage attempts and store data for cloud NoSQL database
+    cloudNoSQL.logStorageAttempt("SQL");
+    cloudNoSQL.storeData("Sql");
+
+    return 0;
 
     /*
         Example Output:
@@ -70,5 +92,4 @@ int main() {
         Storage attempt for data: Sample data 2 logged.
         Storing data in a cloud-based NoSQL database: Sample data 2
     */
-
 }
